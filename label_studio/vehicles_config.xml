@@ -1,0 +1,50 @@
+<View>
+  <Header value="Vehicle Bounding Box Annotation"/>
+
+  <View style="background:#FFF8E7; border-left:5px solid #F5A623;
+               padding:12px 18px; margin-bottom:12px; border-radius:6px;">
+
+    <Header value="Objective" size="5"/>
+    <Text name="obj" value="Draw a tight box around every vehicle in the image and answer Occlusion and Truncation for each box."/>
+
+    <Header value="Label Definitions" size="5"/>
+    <Text name="d1" value="Car: sedans, hatchbacks, SUVs, pickup trucks, minivans"/>
+    <Text name="d2" value="Bus: city buses, coaches, school buses, minibuses"/>
+    <Text name="d3" value="Truck: box trucks, lorries, semi-trucks (cab + trailer = one box), delivery/cargo vans"/>
+    <Text name="d4" value="Motorcycle: motorcycles, scooters, mopeds (box includes the rider)"/>
+
+    <Header value="Attributes (required for every box)" size="5"/>
+    <Text name="a1" value="Occlusion: Yes if about 10% or more is hidden by another object (rider/trailer don't count)"/>
+    <Text name="a2" value="Truncation: Yes if part of the vehicle is cut off by the image edge"/>
+
+    <Header value="Rules" size="5"/>
+    <Text name="r1" value="1. Box only the visible part, tight to the outline. One box per vehicle, even if boxes overlap."/>
+    <Text name="r2" value="2. Skip vehicles smaller than about 10x10 px or that you are unsure about."/>
+    <Text name="r3" value="3. Do NOT label bicycles, trains, reflections, shadows, vehicles behind glass, or vehicles in posters/screens."/>
+  </View>
+
+  <Image name="image" value="$image" zoom="true"/>
+
+  <RectangleLabels name="label" toName="image" canRotate="false">
+    <Label value="Car"        background="#FF6B6B"/>
+    <Label value="Bus"        background="#FFD93D"/>
+    <Label value="Truck"      background="#4D96FF"/>
+    <Label value="Motorcycle" background="#6BCB77"/>
+  </RectangleLabels>
+
+  <View visibleWhen="region-selected">
+    <Header value="Occlusion"/>
+    <Choices name="occlusion" toName="image" perRegion="true"
+             required="true" choice="single-radio">
+      <Choice value="Yes"/>
+      <Choice value="No"/>
+    </Choices>
+
+    <Header value="Truncation"/>
+    <Choices name="truncation" toName="image" perRegion="true"
+             required="true" choice="single-radio">
+      <Choice value="Yes"/>
+      <Choice value="No"/>
+    </Choices>
+  </View>
+</View>

@@ -1,0 +1,16 @@
+clip,speaker,start,end,duration,transcript
+conv_01.wav,Speaker 1,0.0,25.21,25.21,"
+Game is going ahead.
+They will have another meeting at midday just to make sure that everything is all right.
+But they are also telling fans to be really careful about traveling to that game and don't take any unnecessary risks.
+So what can we expect for the rest of today?
+What is the situation at the moment in terms of the weather?
+Sarah Keith Lucas is from the BBC Weather center and gave us this update a little earlier.
+"
+conv_01.wav,Speaker 2,25.77,30.0,4.23,"
+This has been forecast for several days now, hasn't it?
+And it is going to plan.
+We are seeing that."
+conv_02.wav,Speaker 1,0.0,20.73,20.73,"always get through. So Northern Rail have got cancellations and delays, so have ScotRail, and so down in the southwest of England have GWR. So what is the picture across here in West Yorkshire and North Yorkshire? Well, my colleague Eunice Muller is in Harrogate in North Yorkshire and has this update for us."
+conv_02.wav,Speaker 2,22.56,30.0,7.44," Well, as you can see, it is snowing here in Harrogate in North Yorkshire. I was just listening to the to that interview about"
+conv_03.wav,Speaker 1,0.0,30.0,30.0,"but there will be a lot of sunshine around, a much drier looking day, but a cold northerly wind blowing. And in that chillier feeling air, then temperatures won't get much past 8 to 14 degrees Celsius as we head through the afternoon. Some of those temperatures will be slipping for some towards the south in particular. You can see the chilly air on our air mass chart here, just marked in blue, coming down from the north, turning a little milder across the far north and the west as we head into Saturday though. But Friday night is going to be a cold one. Now we will see some clouds"

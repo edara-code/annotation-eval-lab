@@ -1,0 +1,7 @@
+clip,intent,wake_word,words,fillers,transcript
+cmd_01.wav,Set Alarm,Hey Siri,10,0,hey siri set an alarm for six thirty tomorrow morning
+cmd_02.wav,Create Reminder,Alexa,10,0,hey alexa remind me to call mom at five pm
+cmd_03.wav,Play Music,Hey Siri,6,0,hey siri play some relaxing music
+cmd_04.wav,Weather,Alexa,10,0,hey alexa whats the weather like in dublin this weekend
+cmd_05.wav,Navigation,Alexa,8,0,hey alexa navigate to the nearest gas station
+cmd_06.wav,Set Timer,Hey Siri,10,2,hey siri set a timer for uh uh fifteen minutes
