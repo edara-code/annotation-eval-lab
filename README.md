@@ -1,8 +1,6 @@
 # Annotation Eval Lab
 
-A hands-on AI data annotation and quality evaluation project: designing annotation
-guidelines, labeling multimodal data in Label Studio, and measuring annotation
-quality with Python.
+AI/ML data annotation and evaluation work: annotation guidelines, custom Label Studio interfaces, multimodal labeling, and Python-based quality checks and metrics.
 
 ## Project 1: Vehicle bounding-box annotation (image)
 
