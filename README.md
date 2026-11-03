@@ -71,14 +71,3 @@ python src/analyze_annotations.py annotations/image/round1.json
 python src/analyze_audio.py
 python src/analyze_wer.py
 ```
-
-## Repository structure
-
-```
-guidelines/      annotation rules per task
-label_studio/    labeling interface configs
-annotations/     exported annotations (Label Studio JSON)
-src/             analysis scripts
-reports/         generated summaries and charts
-data/raw/        raw data (only the published audio clips are committed; see DATASETS.md)
-```
