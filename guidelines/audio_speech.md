@@ -98,3 +98,14 @@ In conversations, transcribe **each speaker segment separately** in its own text
 
 ## Edge cases found during annotation
 - (add notes here as you annotate)
+
+## Part 4: WER scoring rules
+Before scoring, both human and machine transcripts are normalized identically:
+lowercase, punctuation and apostrophes removed, numbers and times written as words
+("6:30" / "6.30" -> "six thirty"), "a.m./p.m." -> "am/pm".
+
+- **Not an error:** differences removed by normalization (formatting, casing, punctuation, apostrophes, digits).
+- **Error:** any remaining word difference (substitution, deletion, insertion).
+- **Fillers (um, uh):** WER is reported both verbatim and excluding fillers.
+- **Impact:** each error is classified (wake word, number/time, content word, function word, filler)
+  to separate harmless errors from those that could change the user's request.

@@ -1,0 +1,7 @@
+clip,intent,human,machine,ref_words,S,D,I,WER_%,WER_no_fillers_%,impact
+cmd_01,Set Alarm,hey siri set an alarm for six thirty tomorrow morning,hey cd set an alarm for six thirty tomorrow morning,10,1,0,0,10.0,10.0,"intent kept, details changed"
+cmd_02,Create Reminder,hey alexa remind me to call mom at five pm,hey alexa remind me to call mom at five pm,10,0,0,0,0.0,0.0,no impact
+cmd_03,Play Music,hey siri play some relaxing music,hey siri play some relaxing music,6,0,0,0,0.0,0.0,no impact
+cmd_04,Weather,hey alexa whats the weather like in dublin this weekend,hey alexa whats the weather like in dublin this weekend,10,0,0,0,0.0,0.0,no impact
+cmd_05,Navigation,hey alexa navigate to the nearest gas station,hey alexa navigate to the nearest gas station,8,0,0,0,0.0,0.0,no impact
+cmd_06,Set Timer,hey siri set a timer for uh uh fifteen minutes,hey siri set your timer for fifteen minutes,10,1,2,0,30.0,12.5,no impact

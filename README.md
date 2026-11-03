@@ -48,6 +48,18 @@ quality checks against the guidelines.
 
 ![Speaking time per speaker](reports/audio_speaking_time.png)
 
+### ASR evaluation (WER)
+Machine transcripts from **Whisper (base.en)** were compared against the human transcripts (ground truth),
+with identical normalization applied to both ([scoring rules](guidelines/audio_speech.md)).
+
+- **Overall WER: 7.4%**, or **3.8% excluding fillers** (6 clips, 54 words)
+- **All 6 intents preserved:** no ASR error changed the user's request
+- **Wake word misrecognized:** "hey siri" transcribed as "hey cd". General ASR models struggle with product names, which is why assistants use dedicated wake-word models
+- Whisper omits fillers ("uh") by design, so WER is reported both verbatim and excluding fillers
+- Metric verified with known-answer unit tests ([tests/test_wer.py](tests/test_wer.py))
+
+![ASR word error rate per clip](reports/audio_wer.png)
+
 ### Observations
 - The conversation clips contain long, uninterrupted turns with no overlapping speech. Clips with more back-and-forth would test diarization more thoroughly.
 
@@ -58,6 +70,11 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python src/analyze_annotations.py annotations/image/round1.json
 python src/analyze_audio.py
+# ASR evaluation (needs: pip install openai-whisper)
+for f in data/raw/audio/cmd_*.wav; do whisper "$f" --model base.en --language en --fp16 False --output_format txt --output_dir annotations/audio/asr; done
+python src/analyze_wer.py
+# Verify metrics and checks before pushing
+./scripts/check_before_push.sh
 ```
 
 ## Repository structure
@@ -74,7 +91,7 @@ data/raw/        raw data (only the published audio clips are committed; see DAT
 ## Roadmap
 - [x] Image: vehicle bounding boxes + QA report
 - [x] Audio: voice commands (intent, wake word, transcription) + speaker diarization + automated QA checks
-- [ ] Audio: machine transcription comparison (WER)
+- [x] Audio: machine transcription comparison (WER)
 - [ ] LLM evaluation: rubric ratings, side-by-side preferences, safety golden set, LLM autograder calibration
 - [ ] RAG evaluation: groundedness, citation accuracy, hallucination rate
 - [ ] Text: named entities, intent and sentiment
