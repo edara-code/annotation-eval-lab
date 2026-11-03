@@ -63,18 +63,13 @@ with identical normalization applied to both ([scoring rules](guidelines/audio_s
 ### Observations
 - The conversation clips contain long, uninterrupted turns with no overlapping speech. Clips with more back-and-forth would test diarization more thoroughly.
 
-## How to reproduce
+## How to run
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python src/analyze_annotations.py annotations/image/round1.json
 python src/analyze_audio.py
-# ASR evaluation (needs: pip install openai-whisper)
-for f in data/raw/audio/cmd_*.wav; do whisper "$f" --model base.en --language en --fp16 False --output_format txt --output_dir annotations/audio/asr; done
 python src/analyze_wer.py
-# Verify metrics and checks before pushing
-./scripts/check_before_push.sh
 ```
 
 ## Repository structure
@@ -87,14 +82,3 @@ src/             analysis scripts
 reports/         generated summaries and charts
 data/raw/        raw data (only the published audio clips are committed; see DATASETS.md)
 ```
-
-## Roadmap
-- [x] Image: vehicle bounding boxes + QA report
-- [x] Audio: voice commands (intent, wake word, transcription) + speaker diarization + automated QA checks
-- [x] Audio: machine transcription comparison (WER)
-- [ ] LLM evaluation: rubric ratings, side-by-side preferences, safety golden set, LLM autograder calibration
-- [ ] RAG evaluation: groundedness, citation accuracy, hallucination rate
-- [ ] Text: named entities, intent and sentiment
-- [ ] Video: temporal action segmentation and object tracking
-- [ ] Machine translation: MQM error annotation on speech transcripts
-- [ ] Quality framework: golden sets, sampling audits, annotator scorecards, CI quality gates
