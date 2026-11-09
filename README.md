@@ -61,6 +61,38 @@ with identical normalization applied to both ([scoring rules](guidelines/audio_s
 ### Observations
 - The conversation clips contain long, uninterrupted turns with no overlapping speech. Clips with more back-and-forth would test diarization more thoroughly.
 
+## Project 3: LLM response evaluation (human vs. autograder)
+
+**Goal:** Evaluate AI-assistant responses with a written rubric, then measure how well an LLM autograder agrees with human judgment.
+
+| | |
+|---|---|
+| **Evaluation set** | 20 prompts: helpful tasks, factual, instruction following, safety (should answer / should decline), ambiguous ([data/llm_eval/prompts.csv](data/llm_eval/prompts.csv)) |
+| **Systems compared** | Gemini vs. ChatGPT, rated blind with a randomized, balanced order |
+| **Rubric** | Helpfulness (1-5), accuracy (1-5), instruction following, safety (safe / over-refusal / unsafe), side-by-side preference ([guidelines/llm_rubric.md](guidelines/llm_rubric.md)) |
+| **Human ratings** | 40 responses rated in Label Studio ([label_studio/llm_eval_config.xml](label_studio/llm_eval_config.xml)) |
+| **Autograder** | Claude, using the same rubric on the same blinded tasks |
+| **Analysis** | [src/analyze_llm_eval.py](src/analyze_llm_eval.py) → [reports/llm_eval_summary.md](reports/llm_eval_summary.md) |
+
+### Human vs. autograder agreement
+| Criterion | Exact agreement | Kappa |
+|---|---|---|
+| Helpfulness | 62.5% (90% within 1 point) | 0.42 (weighted) |
+| Accuracy | 72.5% (90% within 1 point) | 0.17 (weighted) |
+| Instruction following | 80% | 0.16 |
+| Safety | 95% | 0.00 |
+| Preference | 45% | 0.23 |
+
+![Human vs. autograder agreement](reports/llm_eval_agreement.png)
+
+### Findings
+- **High agreement can hide low reliability:** safety agreement was 95%, but kappa was 0.00. The autograder labeled every response safe and did not flag the rare cases a human did, which is why kappa is used instead of raw agreement.
+- **The autograder was more lenient** than the human rater (+0.22 helpfulness, +0.32 accuracy on average) and chose "tie" in 10 of 20 comparisons, versus 2 for the human.
+- **Assistants were closely matched:** Gemini averaged slightly higher on instruction following (85% vs. 70% fully followed), while ChatGPT was preferred more often on safety-related prompts for more careful guidance and offering alternatives when declining.
+- **Both assistants declined** the privacy and deception requests. No position bias was observed in human side-by-side choices (10 vs. 8).
+- **Takeaway:** at this level of agreement, the autograder suits a first pass on clear-cut criteria, with human review kept for safety and nuanced judgments.
+- Agreement metrics are verified with known-answer unit tests ([tests/test_agreement.py](tests/test_agreement.py)).
+
 ## How to run
 
 ```bash
@@ -68,4 +100,5 @@ pip install -r requirements.txt
 python src/analyze_annotations.py annotations/image/round1.json
 python src/analyze_audio.py
 python src/analyze_wer.py
+python src/analyze_llm_eval.py
 ```

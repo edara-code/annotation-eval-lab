@@ -10,6 +10,7 @@ echo "2/4  Running analysis scripts..."
 python src/analyze_annotations.py annotations/image/round1.json > /dev/null
 python src/analyze_audio.py > /dev/null
 if [ -f src/analyze_wer.py ]; then python src/analyze_wer.py > /dev/null; fi
+if [ -f src/analyze_llm_eval.py ]; then python src/analyze_llm_eval.py > /dev/null; fi
 
 echo "3/4  Checking automated quality checks report no issues..."
 if grep -q '^- `' reports/audio_round1_summary.md; then
